@@ -4,17 +4,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
 
-import java.time.Duration;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 
 @Service
@@ -23,8 +17,10 @@ public class UserService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final String apiUrl = "https://randomuser.me/api";
+    private final String factUrl = "https://cat-fact.herokuapp.com/facts/random";
     private Map<String, Object> userData;
     private String username;
+    private String text;
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     public UserService() {
@@ -69,10 +65,33 @@ public class UserService {
         }
     }
 
+    private void fetchTextData() {
+        try {
+
+            ResponseEntity<Map> response = restTemplate.getForEntity(factUrl, Map.class);
+            Map<String, Object> responseData = response.getBody();
+
+            if (responseData != null) {
+
+                 text = (String) responseData.get("text");
+                System.out.println(text);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error fetching text data: " + e.getMessage());
+        }
+    }
+
+
 
     public Map<String, Object> getUserData() {
         updateUserData();
         return userData;
+    }
+
+    public FactResponse getText(){
+        fetchTextData();
+        return new FactResponse(text);
     }
 
     public UsernameResponse getUsername() {
