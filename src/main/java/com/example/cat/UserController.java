@@ -54,6 +54,7 @@ public class UserController {
      */
 
 
+    /*
     @GetMapping(value = "/user/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Map<String, Object>> streamUserData() {
         return Flux.interval(Duration.ofSeconds(10))
@@ -65,6 +66,51 @@ public class UserController {
                 })
                 .filter(map -> Objects.nonNull(map.get("username")) && Objects.nonNull(map.get("text")));
     }
+
+     */
+
+    /*
+
+    @GetMapping(value = "/user/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<UserTextResponse> streamUserData() {
+        return Flux.interval(Duration.ofSeconds(10))
+                .map(tick -> {
+
+                    String text = userService.getText().getText(); // Fetch text data
+                    String username = userService.getUsername().getUsername(); // Update user data
+
+
+                    return new UserTextResponse(username, text);
+                })
+                .filter(userTextResponse ->
+                        Objects.nonNull(userTextResponse.getUsername()) &&
+                                Objects.nonNull(userTextResponse.getText())
+                );
+    }
+
+     */
+
+    @GetMapping(value = "/user/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<UserTextResponse> streamUserData() {
+        return Flux.interval(Duration.ofSeconds(10))
+                .map(tick -> {
+
+                    FactResponse factResponse = userService.getText();
+                    UsernameResponse usernameResponse = userService.getUsername();
+
+
+                    String text = factResponse.getText();
+                    String username = usernameResponse.getUsername();
+
+
+                    return new UserTextResponse(username, text);
+                })
+                .filter(userTextResponse ->
+                        Objects.nonNull(userTextResponse.getUsername()) &&
+                                Objects.nonNull(userTextResponse.getText())
+                );
+    }
+
 
 
 
