@@ -2,11 +2,16 @@ import React, {useEffect, useState} from 'react';
 import {Observable} from "rxjs";
 import { map } from "rxjs/operators";
 import "./home.css";
+import Header from './Header';
+import Footer from "./Footer";
+import { faPaw } from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 function Home(){
 
     const [usernames, setUsernames] = useState([]);
+    const pawIconsCount = 200;
 
     useEffect(() => {
 
@@ -47,23 +52,49 @@ function Home(){
     }, []);
 
 
+
+
     return(
-        <div className="grid-layout">
 
-            {usernames.map((username, index) => (
-                <div key={index} className="grid-card">
-                    <p>by {username.username}</p>
+        <div>
+
+            <Header/>
+            <div className="hero">
+                <div className="paw-icons">
+                    {Array.from({ length: pawIconsCount }, (_, index) => (
+                        <FontAwesomeIcon
+                            key={index}
+                            icon={faPaw}
+                            size="2x"
+                            className={`paw-icon icon-${index % 10}`}
+                        />
+                    ))}
                 </div>
-            ))}
+                <div className="blur-container">
+                    <h2>Welcome to CatFacts App</h2>
+                    <p>Discover to fascinating World of Cats.</p>
 
 
-            <div className="grid-card">
+                </div>
 
-                <h1>Hello</h1>
+            </div>
+            <div className="grid-layout">
+
+                {usernames.map((username, index) => (
+                    <div key={index} className="grid-card">
+                        <p>by {username.username}</p>
+                    </div>
+                ))}
+
+
+
+
             </div>
 
+            <Footer/>
 
         </div>
+
     );
 }
 

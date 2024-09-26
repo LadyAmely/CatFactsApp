@@ -3,11 +3,11 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     padding: 20px;
-    background-color: #bddcfb;
+    background-color: #efeff1;
 }
 
 .grid-card{
-    background-color: aliceblue;
+    background-color: #1c1918;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
@@ -18,3 +18,100 @@
 .grid-card:hover{
     transform: scale(1.1);
 }
+
+.grid-card p{
+    color: white;
+}
+
+.hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 20px;
+    background-color: #1f1f1f;
+    height: 40vh;
+    overflow: hidden;
+    margin-top: 0;
+    z-index: 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #ffffff;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+
+
+.hero p {
+    font-size: 18px;
+    color: #ffffff;
+    z-index: 2;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+
+
+}
+
+.paw-icons{
+    display: grid;
+    grid-template-columns: repeat(25, 1fr);
+    grid-template-rows: repeat(1, 0.2fr);
+    gap: 20px;
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+
+}
+
+.paw-icon{
+
+    color: #3e0921;
+    animation: change-color 5s infinite;
+
+}
+
+.blur-container{
+
+    height:70%;
+    width:50%;
+    background: rgba(0, 0, 0, 0.07);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    z-index: 2;
+
+}
+
+
+@keyframes change-color{
+    0% {
+        color: #e13a85;
+    }
+
+    50% {
+        color: #ea9cbf;
+    }
+
+    100% {
+        color: #e13a85;
+    }
+}
+
+.icon-0 { transform: rotate(0deg); }
+.icon-1 { transform: rotate(10deg); }
+.icon-2 { transform: rotate(-15deg); }
+.icon-3 { transform: rotate(25deg); }
+.icon-4 { transform: rotate(-30deg); }
+.icon-5 { transform: rotate(45deg); }
+.icon-6 { transform: rotate(-60deg); }
+.icon-7 { transform: rotate(70deg); }
+.icon-8 { transform: rotate(-75deg); }
+.icon-9 { transform: rotate(80deg); }
+
