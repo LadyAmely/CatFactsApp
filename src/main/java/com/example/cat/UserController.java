@@ -21,6 +21,7 @@ public class UserController {
 
 
 
+    /*
     @GetMapping(value = "/user/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<UsernameResponse> streamUserData() {
         return Flux.interval(Duration.ofSeconds(10))
@@ -29,8 +30,10 @@ public class UserController {
     }
 
 
+     */
 
-    /*
+
+
 
     @GetMapping(value = "/cat-facts", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<UserTextResponse> streamUserData() {
@@ -53,6 +56,6 @@ public class UserController {
                 );
     }
 
-     */
+
 
 }

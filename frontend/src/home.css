@@ -1,3 +1,7 @@
+body{
+    background-color: #1c1918;
+}
+
 .grid-layout{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -13,15 +17,49 @@
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 200px;
 }
 
-.grid-card:hover{
-    transform: scale(1.1);
+.grid-card h3{
+    display: inline-block;
+    position: relative;
+    color: #e13a85;
 }
+
+.grid-card h3::after{
+    content: '';
+    background: linear-gradient(90deg, #5c0a1f, #ea9cbf);
+    position: absolute;
+    bottom: -5px;
+    width: 90%;
+    height: 2px;
+    border-radius: 3px;
+    left: 5%;
+}
+
 
 .grid-card p{
     color: white;
+    text-align: justify;
+    margin-left: 5px;
+    margin-right: 5px;
+    word-break: break-word;
 }
+
+.cat-intro-layout{
+    background-color: #1c1918;
+    text-align: center;
+    height: auto;
+
+}
+
+.cat-intro-layout h3{
+    color: white;
+}
+
+
 
 .hero {
     position: relative;
@@ -74,7 +112,7 @@
 .paw-icon{
 
     color: #3e0921;
-    animation: change-color 5s infinite;
+    animation: change-color 8s infinite;
 
 }
 
@@ -95,8 +133,17 @@
         color: #e13a85;
     }
 
+    25% {
+
+        color: #e6b8cd;
+    }
+
     50% {
         color: #ea9cbf;
+    }
+
+    75% {
+        color: #dc0b69;
     }
 
     100% {
@@ -114,4 +161,35 @@
 .icon-7 { transform: rotate(70deg); }
 .icon-8 { transform: rotate(-75deg); }
 .icon-9 { transform: rotate(80deg); }
+
+
+.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+
+
+}
+
+
+.typewriter-text {
+    display: inline-block;
+    font-family: monospace;
+    animation: typing 2s steps(30, end) 1;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: none;
+}
+
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+
 

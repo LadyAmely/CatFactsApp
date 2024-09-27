@@ -4,10 +4,10 @@
     font-family: 'Roboto', sans-serif;
     padding: 20px 0;
     text-align: center;
-    border-top: 1px solid #444;
-    margin-top: 0px;
+    margin-top: 0;
     position: relative;
     z-index: 10;
+    border-top: #e13a85 2px solid;
 
 }
 
@@ -20,3 +20,4 @@
     align-items: center;
     gap: 20px;
 }
+
