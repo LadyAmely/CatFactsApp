@@ -104,9 +104,7 @@ function Home(){
             </div>
 
 
-
             <div className="grid-layout">
-
 
 
                 {usernames.map((username, index) => (
@@ -118,6 +116,11 @@ function Home(){
                 ))}
 
                 {isGenerating && <p>Generating...</p>}
+
+
+
+
+
             </div>
 
             <Footer/>

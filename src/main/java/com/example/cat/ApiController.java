@@ -60,6 +60,11 @@ public class ApiController {
         }
     }
 
+    @GetMapping("/hello")
+    public String hello(){
+        return "welcome";
+    }
+
 
 
 }
