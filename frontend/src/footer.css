@@ -1,5 +1,4 @@
 .footer {
-    background-color: #121212;
     color: #ecf0f1;
     font-family: 'Roboto', sans-serif;
     padding: 20px 0;
@@ -7,8 +6,20 @@
     margin-top: 0;
     position: relative;
     z-index: 10;
-    border-top: #e13a85 2px solid;
+    border-top: transparent 2px solid;
+    background: linear-gradient(#121212, #121212) padding-box,
+    linear-gradient(45deg, #e13a85, #ff6f61) border-box;
+    background-clip: padding-box, border-box;
 
+}
+
+.footer-text {
+    font-size: 1.1rem;
+    font-weight: 500;
+    background: linear-gradient(45deg, #e13a85, #ff6f61);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: 'Poppins', sans-serif;
 }
 
 .footer .container {

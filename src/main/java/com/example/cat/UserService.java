@@ -3,7 +3,6 @@ package com.example.cat;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.ResponseEntity;
-
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -17,7 +16,8 @@ public class UserService {
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final String apiUrl = "https://randomuser.me/api";
-    private final String factUrl = "https://cat-fact.herokuapp.com/facts/random";
+    private final String factUrl = "https://cat-fact.herokuapp.com/facts/random?source=user";
+    //private final String factUrl = "https://cat-fact.herokuapp.com/facts?animal_type=cat&category=history";
     private Map<String, Object> userData;
     private String username;
     private String text;
@@ -47,7 +47,7 @@ public class UserService {
         try {
             ResponseEntity<Map> response = restTemplate.getForEntity(apiUrl, Map.class);
             userData = response.getBody();
-            //System.out.println("Updated user data: " + userData);
+
 
             if (userData != null && userData.containsKey("results")) {
 
@@ -56,7 +56,7 @@ public class UserService {
 
                     Map<String, Object> loginData = (Map<String, Object>) results.get(0).get("login");
                     username = (String) loginData.get("username");
-                    System.out.println("Username: " + username);
+                    System.out.println("User: " + username);
                 }
             }
 
@@ -64,6 +64,7 @@ public class UserService {
             System.err.println("Error fetching user data: " + e.getMessage());
         }
     }
+
 
     private void fetchTextData() {
         try {
@@ -83,7 +84,6 @@ public class UserService {
     }
 
 
-
     public Map<String, Object> getUserData() {
         updateUserData();
         return userData;
@@ -91,12 +91,24 @@ public class UserService {
 
     public FactResponse getText(){
         fetchTextData();
+        /*
+        if (filterText(text)) {
+            return new FactResponse(text);
+        }
+
+         */
+
         return new FactResponse(text);
     }
 
     public UsernameResponse getUsername() {
         updateUserData();
         return new UsernameResponse(username);
+    }
+
+    public boolean filterText(String text) {
+
+        return text != null && text.toLowerCase().contains("cats");
     }
 
 
