@@ -1,15 +1,15 @@
 package com.example.cat;
 
-public class UserTextResponse {
+public class FullResponse {
+
     private String username;
     private String text;
 
 
-    public UserTextResponse(String username, String text) {
+    public FullResponse(String username, String text) {
         this.username = username;
         this.text = text;
     }
-
 
     public String getUsername() {
         return username;
