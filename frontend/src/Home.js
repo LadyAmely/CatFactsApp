@@ -4,15 +4,14 @@ import { map } from "rxjs/operators";
 import "./home.css";
 import Header from './Header';
 import Footer from "./Footer";
-import { faPaw, faCat } from '@fortawesome/free-solid-svg-icons';
+import { faCat } from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function Home(){
 
-    const [usernames, setUsernames] = useState([]);
+    const [catFacts, setCatFacts] = useState([]);
     const [isGenerating, setGenerating] = useState(false);
     const [isError, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
     const pawIconsCount = 200;
     const max_visible_cards = 15;
 
@@ -27,18 +26,12 @@ function Home(){
 
             eventSource.onerror = (error) => {
                 setError(true);
-               // setErrorMessage('503 Service Unavailable');
                 subscriber.error(error);
-
-
             };
-
-
             return () => {
                 eventSource.close();
             };
         });
-
 
         const subscription = userStream$
             .pipe(
@@ -48,7 +41,7 @@ function Home(){
             .subscribe({
                 next: ({username, text}) => {
                     setGenerating(true);
-                    setUsernames((prevUsernames) =>{
+                    setCatFacts((prevUsernames) =>{
 
                        const newList =  [...prevUsernames, {username, text}]
                         if (newList.length > max_visible_cards) {
@@ -75,20 +68,16 @@ function Home(){
     return(
 
         <div>
-
             <Header/>
             <div className="hero">
                 <div className="paw-icons">
                     {Array.from({length: pawIconsCount}, (_, index) => (
-
                         <FontAwesomeIcon
                             key={index}
                             icon={faCat}
                             size="2x"
                             className={`paw-icon icon-${index % 10}`}
                         />
-
-
                     ))}
                 </div>
                 <div className="blur-container">
@@ -96,14 +85,10 @@ function Home(){
                     <div className="typewriter">
                         <span className="typewriter-text"><p>Discover to fascinating World of Cats.</p></span>
                     </div>
-
-
                 </div>
-
             </div>
 
             <div className="cat-intro-layout">
-
                 <h3>Feline Fun Facts!
                     Get ready to learn some intriguing and surprising facts about our feline friends. <br/>Whether
                     you're a cat lover or simply curious, we have something for everyone!</h3>
@@ -111,8 +96,6 @@ function Home(){
 
 
             <div className="grid-layout">
-
-
                 {isError ? (
                     <div className="error-message">
                         <span className="error-icon">⚠️</span>
@@ -131,16 +114,15 @@ function Home(){
                 )}
 
 
-                {usernames.map((username, index) => (
+
+                {catFacts.map((username, index) => (
                     <div key={index} className="grid-card">
                         <p className="card-subtitle">by {username.username}</p>
                         <h3 className="card-title">Fact</h3>
-
-                            <p>{username.text}</p>
-
-
+                        <p>{username.text}</p>
                     </div>
                 ))}
+
 
                 {isGenerating &&
                     <p className="loading">Generating
@@ -148,15 +130,8 @@ function Home(){
                         <span>.</span>
                         <span>.</span>
                     </p>}
-
-
             </div>
-
-
-
-
             <Footer/>
-
         </div>
 
     );

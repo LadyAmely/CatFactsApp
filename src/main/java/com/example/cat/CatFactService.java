@@ -3,7 +3,9 @@ package com.example.cat;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +53,7 @@ public class CatFactService {
 
     public Mono<Map> getFactAsync(){
         return webClient.get()
-                .uri("https://cat-fact.herokuapp.com/facts/random?source=user")
+                .uri("https://cat-fact.herokuapp.com/facts/random")
                 .retrieve()
                 .bodyToMono(Map.class)
                 .doOnNext(responseData -> {
@@ -62,6 +64,7 @@ public class CatFactService {
                 });
     }
 
+
     public Mono<FactResponse> getText(){
         return getFactAsync()
                 .flatMap(responseData->{
@@ -69,9 +72,9 @@ public class CatFactService {
                         String text = (String) responseData.get("text");
                         return Mono.just(new FactResponse(text));
                     }
-
                     return Mono.empty();
                 });
     }
+
 
 }
